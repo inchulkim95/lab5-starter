@@ -3,6 +3,8 @@
 
 char const HTTP_404_NOT_FOUND[] = "HTTP/1.1 404 Not Found\r\nContent-Type: text/plain\r\n\r\n";
 
+char const HTTP_200_OK[] = "HTTP/1.1 200 OK\r\nContent-Type: text/plain\r\n\r\n";
+
 void handle_404(int client_sock, char *path)  {
     printf("SERVER LOG: Got request for unrecognized path \"%s\"\n", path);
 
@@ -11,6 +13,8 @@ void handle_404(int client_sock, char *path)  {
     // snprintf includes a null-terminator
 
     // TODO: send response back to client?
+  	write(client_sock, HTTP_404_NOT_FOUND, strlen(HTTP_404_NOT_FOUND));
+	write(client_sock, response_buff, strlen(response_buff));
 }
 
 
